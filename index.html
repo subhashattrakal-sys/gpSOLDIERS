@@ -6,12 +6,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>GP Soldiers Academy</title>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons CDN -->
+
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
         * {
             margin: 0;
@@ -19,6 +20,7 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
+
         :root {
             --primary: #2f66ff;
             --primary-light: rgba(47, 102, 255, 0.1);
@@ -30,21 +32,20 @@
             --safe-area-top: env(safe-area-inset-top, 0px);
             --safe-area-bottom: env(safe-area-inset-bottom, 0px);
         }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--background);
             color: var(--text-primary);
-            overscroll-behavior: none;
-            -webkit-font-smoothing: antialiased;
         }
+
         .app-container {
             max-width: 430px;
             margin: 0 auto;
-            min-height: 100dvh;
+            min-height: 100vh;
             background: var(--background);
-            position: relative;
-            box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
         }
+
         /* HEADER */
         .header {
             background: var(--primary);
@@ -53,187 +54,156 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
+
         .logo {
             width: 48px;
             height: 48px;
             border-radius: 50%;
             background: white;
             padding: 2px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             cursor: pointer;
-            transition: transform 0.1s;
         }
-        .logo:active {
-            transform: scale(0.9);
-        }
+
         .header-text h1 {
             color: white;
             font-size: 18px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
+
         .header-text p {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255,255,255,0.7);
             font-size: 12px;
-            font-weight: 500;
         }
+
         /* BANNER */
         .banner {
             padding: 16px;
             padding-bottom: 0;
         }
+
+        .banner-container {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
         .banner-image {
             width: 100%;
             height: 176px;
             object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
-        .banner-container {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-        }
+
         .banner-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 16px;
-            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
         }
+
         .banner-overlay p {
             color: white;
-            font-weight: 600;
             font-size: 14px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 600;
         }
+
         /* ANNOUNCEMENT */
         .announcement {
             margin: 16px;
             background: var(--primary-light);
-            border: 1px solid rgba(47, 102, 255, 0.2);
-            border-radius: 12px;
             padding: 12px;
+            border-radius: 12px;
             display: flex;
-            align-items: flex-start;
             gap: 12px;
         }
+
         .announcement-icon {
             width: 32px;
             height: 32px;
             border-radius: 50%;
             background: var(--primary-light);
             display: flex;
-            align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            align-items: center;
         }
-        .announcement-icon i {
-            color: var(--primary);
-            width: 16px;
-            height: 16px;
-        }
-        .announcement h3 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        .announcement p {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-        /* MENU SECTION */
+
+        /* MENU */
         .menu-section {
             padding: 0 16px 20px;
         }
+
         .section-title {
             font-size: 16px;
             font-weight: 700;
-            color: var(--text-primary);
             margin-bottom: 16px;
         }
+
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3,1fr);
             gap: 12px;
         }
+
         .menu-card {
-            background: var(--card);
+            background: white;
             padding: 16px 8px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            cursor: pointer;
-            transition: all 0.15s;
-            border: none;
-            min-height: 100px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             gap: 10px;
+            cursor: pointer;
         }
-        .menu-card:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
+
         .menu-card-icon {
             width: 48px;
             height: 48px;
             border-radius: 50%;
             background: var(--primary-light);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
-        .menu-card-icon i {
-            color: var(--primary);
-            width: 24px;
-            height: 24px;
-        }
+
         .menu-card p {
             font-size: 12px;
             font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.3;
         }
-        /* FEATURES CARD */
+
+        /* FEATURES */
         .features-card {
             margin: 0 16px 100px;
             background: linear-gradient(135deg, var(--primary), #1a4fd6);
-            border-radius: 16px;
             padding: 16px;
+            border-radius: 16px;
             color: white;
         }
+
         .features-header {
             display: flex;
-            align-items: center;
             gap: 8px;
             margin-bottom: 12px;
         }
-        .features-header i {
-            width: 20px;
-            height: 20px;
-        }
-        .features-header h3 {
-            font-size: 16px;
-            font-weight: 700;
-        }
-        .features-list {
-            list-style: none;
-        }
+
         .features-list li {
-            font-size: 14px;
-            opacity: 0.9;
+            list-style: none;
             padding: 4px 0;
+            font-size: 14px;
         }
-        /* BOTTOM NAV */
+
+        /* PAGE SYSTEM */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* UPDATED BOTTOM NAV */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -241,473 +211,186 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 430px;
+            height: 62px;
             background: var(--card);
-            padding: 8px 0;
-            padding-bottom: calc(var(--safe-area-bottom) + 8px);
             display: flex;
             justify-content: space-around;
+            align-items: center;
             border-top: 1px solid var(--border);
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+            padding-bottom: calc(var(--safe-area-bottom) + 6px);
+            padding-top: 6px;
             z-index: 100;
         }
+
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            padding: 6px 24px;
+            gap: 3px;
+            padding: 4px 16px;
+            font-size: 11px;
             color: var(--text-secondary);
-            text-decoration: none;
             cursor: pointer;
+            font-weight: 600;
             position: relative;
-            transition: all 0.15s;
         }
-        .nav-item:active {
-            transform: scale(0.9);
-        }
+
         .nav-item i {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
         }
-        .nav-item span {
-            font-size: 12px;
-            font-weight: 500;
-        }
+
         .nav-item.active {
             color: var(--primary);
         }
+
         .nav-item.active::before {
             content: '';
             position: absolute;
             top: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 32px;
-            height: 4px;
+            width: 36px;
+            height: 3px;
             background: var(--primary);
             border-radius: 4px;
         }
-        /* PAGE VIEWS */
-        .page {
-            display: none;
-            animation: fadeIn 0.2s ease;
-        }
-        .page.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        /* ADDRESS PAGE */
-        .contact-card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .contact-icon i {
-            color: var(--primary);
-            width: 20px;
-            height: 20px;
-        }
-        .contact-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-        .contact-value {
-            font-size: 14px;
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-top: 2px;
-        }
-        /* ABOUT PAGE */
-        .about-hero {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .about-logo {
-            width: 96px;
-            height: 96px;
-            border-radius: 50%;
-            background: white;
-            padding: 4px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            margin-bottom: 16px;
-        }
-        .about-hero h1 {
-            font-size: 20px;
-            font-weight: 700;
-        }
-        .about-hero p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .stat-card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .stat-card i {
-            color: var(--primary);
-            width: 24px;
-            height: 24px;
-            margin-bottom: 4px;
-        }
-        .stat-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
-        .content-card {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-        .content-card-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        .content-card-header i {
-            color: var(--primary);
-            width: 20px;
-            height: 20px;
-        }
-        .content-card-header h2 {
-            font-size: 16px;
-            font-weight: 700;
-        }
-        .content-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        .program-list {
-            list-style: none;
-        }
-        .program-list li {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            padding: 6px 0;
-        }
-        .program-list li::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--primary);
-            flex-shrink: 0;
-        }
-        .page-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        .page-content {
-            padding: 20px 16px 100px;
-        }
-        /* Map placeholder */
-        .map-placeholder {
-            background: var(--card);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            margin-top: 12px;
-        }
-        .map-inner {
-            height: 192px;
-            background: #e5e7eb;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .map-inner i {
-            width: 40px;
-            height: 40px;
-            color: var(--text-secondary);
-        }
-        .map-inner p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-        .map-inner small {
-            color: var(--text-secondary);
-            font-size: 12px;
-            opacity: 0.7;
-        }
     </style>
 </head>
+
 <body>
     <div class="app-container">
+
         <!-- HEADER -->
         <header class="header">
-            <img src="https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=100&h=100&fit=crop&auto=format" 
-                 id="gpLogo" class="logo" alt="GP Logo">
+            <img src="images/gplogo.jpg" id="gpLogo" class="logo">
             <div class="header-text">
                 <h1>GP SOLDIERS ACADEMY</h1>
                 <p>Your Path to Indian Army</p>
             </div>
         </header>
+
         <!-- HOME PAGE -->
         <div id="home-page" class="page active">
-            <!-- BANNER -->
+
+            <!-- Banner -->
             <div class="banner">
                 <div class="banner-container">
-                    <img src="https://images.unsplash.com/photo-1579912437766-7896df6d3cd3?w=800&h=400&fit=crop&auto=format" 
-                         class="banner-image" alt="Army Training Banner">
+                    <img src="images/banner.jpg" class="banner-image">
                     <div class="banner-overlay">
                         <p>Join India's Premier Army Preparation Institute</p>
                     </div>
                 </div>
             </div>
-            <!-- ANNOUNCEMENT -->
+
+            <!-- Announcement -->
             <div class="announcement">
-                <div class="announcement-icon">
-                    <i data-lucide="bell"></i>
-                </div>
+                <div class="announcement-icon"><i data-lucide="bell"></i></div>
                 <div>
                     <h3>New Batch Starting!</h3>
-                    <p>Army GD, Technical & Clerk preparations begin February 2026</p>
+                    <p>Army GD / Technical / Clerk batch from Feb 2026</p>
                 </div>
             </div>
-            <!-- MENU GRID -->
+
+            <!-- Menu -->
             <section class="menu-section">
                 <h2 class="section-title">Quick Access</h2>
+
                 <div class="menu-grid">
-                    <button class="menu-card" onclick="showAlert('Training Videos')">
-                        <div class="menu-card-icon"><i data-lucide="play-circle"></i></div>
-                        <p>Our Training Videos</p>
-                    </button>
-                    <button class="menu-card" onclick="showAlert('Army Exam Test')">
-                        <div class="menu-card-icon"><i data-lucide="clipboard-check"></i></div>
-                        <p>Army Exam Test</p>
-                    </button>
-                    <button class="menu-card" onclick="showAlert('Army Exam Notes')">
-                        <div class="menu-card-icon"><i data-lucide="file-text"></i></div>
-                        <p>Army Exam Notes</p>
-                    </button>
-                    <button class="menu-card" onclick="showAlert('Results')">
-                        <div class="menu-card-icon"><i data-lucide="trophy"></i></div>
-                        <p>Results</p>
-                    </button>
-                    <button class="menu-card" onclick="showAlert('Army Video')">
-                        <div class="menu-card-icon"><i data-lucide="video"></i></div>
-                        <p>Army Video</p>
-                    </button>
-                    <button class="menu-card" onclick="showAlert('Previous Years')">
-                        <div class="menu-card-icon"><i data-lucide="clock"></i></div>
-                        <p>Previous Years</p>
-                    </button>
+                    <button class="menu-card"><div class="menu-card-icon"><i data-lucide="play-circle"></i></div><p>Our Training Videos</p></button>
+                    <button class="menu-card"><div class="menu-card-icon"><i data-lucide="clipboard-check"></i></div><p>Army Exam Test</p></button>
+                    <button class="menu-card"><div class="menu-card-icon"><i data-lucide="file-text"></i></div><p>Army Exam Notes</p></button>
+                    <button class="menu-card"><div class="menu-card-icon"><i data-lucide="trophy"></i></div><p>Results</p></button>
+                    <button class="menu-card"><div class="menu-card-icon"><i data-lucide="video"></i></div><p>Army Video</p></button>
+                    <button class="menu-card"><div class="menu-card-icon"><i data-lucide="clock"></i></div><p>Previous Years</p></button>
                 </div>
             </section>
-            <!-- FEATURES -->
+
+            <!-- Features -->
             <div class="features-card">
                 <div class="features-header">
                     <i data-lucide="sparkles"></i>
                     <h3>Why Choose Us?</h3>
                 </div>
                 <ul class="features-list">
-                    <li>• Expert trainers with Army background</li>
-                    <li>• 95% selection rate in last 5 years</li>
-                    <li>• Physical & written exam preparation</li>
+                    <li>• Expert trainers from Army</li>
+                    <li>• 95% selection success</li>
+                    <li>• Physical + Written preparation</li>
                     <li>• Hostel facility available</li>
                 </ul>
             </div>
         </div>
+
         <!-- ADDRESS PAGE -->
         <div id="address-page" class="page">
-            <div class="page-content">
-                <h1 class="page-title">Contact Us</h1>
-                <div class="contact-card">
-                    <div class="contact-icon"><i data-lucide="map-pin"></i></div>
-                    <div>
-                        <p class="contact-label">Address</p>
-                        <p class="contact-value">GP Soldiers Academy, Near Railway Station, Sector 12, Rohtak, Haryana - 124001</p>
-                    </div>
-                </div>
-                <a href="tel:+919876543210" class="contact-card" style="text-decoration: none;">
-                    <div class="contact-icon"><i data-lucide="phone"></i></div>
-                    <div>
-                        <p class="contact-label">Phone</p>
-                        <p class="contact-value">+91 98765 43210</p>
-                    </div>
-                </a>
-                <a href="mailto:info@gpsoldiersacademy.com" class="contact-card" style="text-decoration: none;">
-                    <div class="contact-icon"><i data-lucide="mail"></i></div>
-                    <div>
-                        <p class="contact-label">Email</p>
-                        <p class="contact-value">info@gpsoldiersacademy.com</p>
-                    </div>
-                </a>
-                <div class="contact-card">
-                    <div class="contact-icon"><i data-lucide="clock"></i></div>
-                    <div>
-                        <p class="contact-label">Timings</p>
-                        <p class="contact-value">Mon - Sat: 6:00 AM - 8:00 PM</p>
-                    </div>
-                </div>
-                <div class="map-placeholder">
-                    <div class="map-inner">
-                        <i data-lucide="map-pin"></i>
-                        <p>Map View</p>
-                        <small>Tap to open in Maps</small>
-                    </div>
-                </div>
+            <div style="padding:20px">
+                <h1>Address</h1>
+                <p>GP Soldiers Academy  
+                Vijayapur, Karnataka</p>
             </div>
         </div>
+
         <!-- ABOUT PAGE -->
         <div id="about-page" class="page">
-            <div class="page-content">
-                <div class="about-hero">
-                    <img src="https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=200&h=200&fit=crop&auto=format" 
-                         class="about-logo" alt="GP Logo">
-                    <h1>GP Soldiers Academy</h1>
-                    <p>Building Tomorrow's Defenders</p>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i data-lucide="users"></i>
-                        <p class="stat-value">5000+</p>
-                        <p class="stat-label">Students Trained</p>
-                    </div>
-                    <div class="stat-card">
-                        <i data-lucide="target"></i>
-                        <p class="stat-value">95%</p>
-                        <p class="stat-label">Selection Rate</p>
-                    </div>
-                    <div class="stat-card">
-                        <i data-lucide="award"></i>
-                        <p class="stat-value">15+</p>
-                        <p class="stat-label">Years Experience</p>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <div class="content-card-header">
-                        <i data-lucide="shield"></i>
-                        <h2>Our Mission</h2>
-                    </div>
-                    <p>GP Soldiers Academy is a premier defense training institute dedicated to preparing young aspirants for a glorious career in the Indian Armed Forces. With our expert trainers, state-of-the-art facilities, and proven methodology, we have helped thousands of students achieve their dream of serving the nation.</p>
-                </div>
-                <div class="content-card">
-                    <div class="content-card-header">
-                        <i data-lucide="book-open"></i>
-                        <h2>Our Programs</h2>
-                    </div>
-                    <ul class="program-list">
-                        <li>Army GD (General Duty) Preparation</li>
-                        <li>Army Technical Tradesman</li>
-                        <li>Army Clerk / SKT</li>
-                        <li>Physical Training & Running</li>
-                        <li>Medical Test Guidance</li>
-                    </ul>
-                </div>
+            <div style="padding:20px">
+                <h1>About Us</h1>
+                <p>We prepare students for Indian Army selections.</p>
             </div>
         </div>
-        <!-- BOTTOM NAV -->
+
+        <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <a class="nav-item active" id="nav-home" onclick="showPage('home')">
                 <i data-lucide="home"></i>
                 <span>Home</span>
             </a>
+
             <a class="nav-item" id="nav-address" onclick="showPage('address')">
                 <i data-lucide="map-pin"></i>
                 <span>Address</span>
             </a>
+
             <a class="nav-item" id="nav-about" onclick="showPage('about')">
                 <i data-lucide="info"></i>
                 <span>About Us</span>
             </a>
         </nav>
+
     </div>
+
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
-        // Page navigation
-        function showPage(pageName) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Remove active from all nav items
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Show selected page
-            document.getElementById(pageName + '-page').classList.add('active');
-            document.getElementById('nav-' + pageName).classList.add('active');
-            
-            // Scroll to top
+
+        function showPage(page) {
+            document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+            document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+
+            document.getElementById(page + "-page").classList.add("active");
+            document.getElementById("nav-" + page).classList.add("active");
+
             window.scrollTo(0, 0);
         }
-        // Alert for coming soon features
-        function showAlert(feature) {
-            alert(feature + ' - Coming Soon!');
-        }
-        // Secret long press admin unlock
+
+        // Long press admin unlock
         let pressTimer;
         const logo = document.getElementById('gpLogo');
+
         logo.addEventListener('mousedown', startPress);
         logo.addEventListener('touchstart', startPress);
         logo.addEventListener('mouseup', endPress);
         logo.addEventListener('touchend', endPress);
         logo.addEventListener('mouseleave', endPress);
-        function startPress(e) {
-            e.preventDefault();
-            pressTimer = setTimeout(function() {
-                let pass = prompt('Enter admin password:');
-                if (pass === 'gpsoldiers2024') {
-                    alert('Admin access granted!');
-                    // window.location.href = 'admin.html';
-                } else if (pass !== null) {
-                    alert('Incorrect password');
+
+        function startPress() {
+            pressTimer = setTimeout(() => {
+                let pass = prompt("Enter admin password:");
+                if (pass === "gpsoldiers2024") {
+                    alert("Admin Access Granted");
+                    // window.location.href = "admin.html";
+                } else {
+                    alert("Incorrect Password");
                 }
             }, 1500);
         }
+
         function endPress() {
             clearTimeout(pressTimer);
         }
