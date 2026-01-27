@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GP Soldiers Academy</title>
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+        }
+
+        /* HEADER */
+        .header {
+            background: #2f66ff;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        /* BANNER */
+        .banner img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* MENU CARDS */
+        .menu-grid {
+            margin: 20px 10px 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 18px 10px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        .menu-card i {
+            font-size: 32px;
+            color: #2f66ff;
+        }
+
+        .menu-card p {
+            font-size: 14px;
+            margin-top: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .menu-card:active {
+            transform: scale(0.95);
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 8px 0;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #ddd;
+        }
+
+        .nav-item {
+            color: #6c7986;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .nav-item i {
+            font-size: 22px;
+            display: block;
+        }
+
+        .active {
+            color: #2f66ff !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <img src="images/gplogo.jpg" id="gpLogo" class="logo" alt="GP Logo">
+        <h1>GP SOLDIERS ACADEMY</h1>
+    </header>
+
+    <!-- BANNER -->
+    <div class="banner">
+        <img src="images/banner.jpg" alt="Banner">
+    </div>
+
+    <!-- GRID MENU -->
+    <section class="menu-grid">
+
+        <div class="menu-card">
+            <i class="ri-play-circle-fill"></i>
+            <p>Our Training Videos</p>
+        </div>
+
+        <div class="menu-card">
+            <i class="ri-clipboard-check-fill"></i>
+            <p>Army Exam Test</p>
+        </div>
+
+        <div class="menu-card">
+            <i class="ri-file-list-3-fill"></i>
+            <p>Army Exam Notes</p>
+        </div>
+
+        <div class="menu-card">
+            <i class="ri-trophy-fill"></i>
+            <p>Results</p>
+        </div>
+
+        <div class="menu-card">
+            <i class="ri-video-fill"></i>
+            <p>Army Video</p>
+        </div>
+
+        <div class="menu-card">
+            <i class="ri-time-fill"></i>
+            <p>Previous Years</p>
+        </div>
+
+    </section>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+        <a class="nav-item active"><i class="ri-home-4-fill"></i><span>Home</span></a>
+        <a class="nav-item"><i class="ri-map-pin-fill"></i><span>Address</span></a>
+        <a class="nav-item"><i class="ri-information-fill"></i><span>About Us</span></a>
+    </nav>
+
+    <script>
+        // ------------------------------
+        // Secret Long Press Admin Unlock
+        // ------------------------------
+
+        let pressTimer;
+
+        document.getElementById("gpLogo").addEventListener("mousedown", function () {
+            pressTimer = setTimeout(function () {
+                let pass = prompt("Enter admin password:");
+                if (pass === "YOUR_ADMIN_PASSWORD") {
+                    window.location.href = "admin.html";
+                } else if (pass !== null) {
+                    alert("Incorrect password");
+                }
+            }, 1500); // Long press time: 1.5 seconds
+        });
+
+        document.getElementById("gpLogo").addEventListener("mouseup", () => clearTimeout(pressTimer));
+        document.getElementById("gpLogo").addEventListener("mouseleave", () => clearTimeout(pressTimer));
+    </script>
+
+</body>
+</html>
