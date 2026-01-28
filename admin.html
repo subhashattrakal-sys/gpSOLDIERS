@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>GP Soldiers Admin - Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --primary: #D19E33;
+      --primary-dark: #b5892c;
+      --primary-light: rgba(209,158,51,0.15);
+      --background: #F7F3E9;
+      --card: #FFFFFF;
+      --text-dark: #3A2F1B;
+      --text-light: #7E6E58;
+      --border: #E6DCC8;
+      --danger: #c2410c;
+      --success: #15803d;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    .admin-container {
+      max-width: 420px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--background);
+      padding: 0 16px;
+    }
+
+    /* Header */
+    .admin-header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px;
+      padding-top: calc(var(--safe-area-top) + 16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      padding: 3px;
+    }
+
+    .admin-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .admin-welcome {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    /* Welcome Card */
+    .welcome-card {
+      margin: 24px 0 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, #b5892c 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(209,158,51,0.35);
+    }
+
+    .welcome-card h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .welcome-card p {
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    /* Menu Grid - Big Buttons */
+    .admin-menu {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .admin-btn {
+      background: white;
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      transition: all 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-btn:hover,
+    .admin-btn:active {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(209,158,51,0.3);
+      border-color: var(--primary-dark);
+    }
+
+    .admin-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(209,158,51,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .admin-btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-light);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .btn-icon i {
+      color: var(--primary);
+      width: 32px;
+      height: 32px;
+    }
+
+    .btn-danger .btn-icon {
+      background: rgba(194,65,12,0.12);
+    }
+    .btn-danger i {
+      color: var(--danger);
+    }
+
+    .btn-success .btn-icon {
+      background: rgba(21,128,61,0.12);
+    }
+    .btn-success i {
+      color: var(--success);
+    }
+
+    /* Footer */
+    .admin-footer {
+      text-align: center;
+      padding: 24px 0 40px;
+      color: var(--text-light);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-container">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <img src="images/gplogo.jpg" alt="GP Logo" class="admin-logo">
+    <div>
+      <div class="admin-title">Admin Panel</div>
+      <div class="admin-welcome">GP Soldiers Academy</div>
+    </div>
+    <div style="width:48px;"></div> <!-- spacer -->
+  </header>
+
+  <!-- Welcome Banner -->
+  <div class="welcome-card">
+    <h1>Welcome, Admin</h1>
+    <p>Manage academy content & students • January 2026</p>
+  </div>
+
+  <!-- Big Action Buttons -->
+  <div class="admin-menu">
+
+    <a href="take-test.html" class="admin-btn">
+      <div class="btn-icon">
+        <i data-lucide="clipboard-check"></i>
+      </div>
+      <div>Take / Create Test</div>
+    </a>
+
+    <a href="upload-video.html" class="admin-btn">
+      <div class="btn-icon">
+        <i data-lucide="video"></i>
+      </div>
+      <div>Upload New Video</div>
+    </a>
+
+    <a href="see-results.html" class="admin-btn btn-success">
+      <div class="btn-icon">
+        <i data-lucide="trophy"></i>
+      </div>
+      <div>See Results & Rankings</div>
+    </a>
+
+    <a href="add-students.html" class="admin-btn">
+      <div class="btn-icon">
+        <i data-lucide="user-plus"></i>
+      </div>
+      <div>Add New Students</div>
+    </a>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="admin-footer">
+    © 2026 GP Soldiers Academy – Admin Panel<br>
+    For authorized personnel only
+  </div>
+
+</div>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>
