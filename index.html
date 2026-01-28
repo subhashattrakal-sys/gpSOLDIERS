@@ -6,260 +6,216 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>GP Soldiers Academy</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Lucide Icons -->
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
         * {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-
+        /* CREAM THEME */
         :root {
-            --primary: #2f66ff;
-            --primary-light: rgba(47, 102, 255, 0.1);
-            --background: #f2f4f7;
-            --card: #ffffff;
-            --text-primary: #1a1f36;
-            --text-secondary: #6b7280;
-            --border: #e5e7eb;
-            --safe-area-top: env(safe-area-inset-top, 0px);
-            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+            --primary: #D19E33; /* gold */
+            --primary-light: rgba(209,158,51,0.15);
+            --background: #F7F3E9; /* cream */
+            --card: #FFFFFF; /* white */
+            --text-primary: #3A2F1B; /* dark coffee */
+            --text-secondary: #7E6E58;
+            --border: #E6DCC8;
+            --safe-area-top: env(safe-area-inset-top);
+            --safe-area-bottom: env(safe-area-inset-bottom);
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background: var(--background);
             color: var(--text-primary);
         }
-
         .app-container {
             max-width: 430px;
             margin: 0 auto;
             min-height: 100vh;
             background: var(--background);
-            padding-bottom: 62px;
         }
-
         /* HEADER */
         .header {
-            background: var(--primary);
-            padding: 12px 16px;
-            padding-top: calc(var(--safe-area-top) + 12px);
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
+            padding-top: calc(var(--safe-area-top) + 14px);
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
         .logo {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: white;
+            border: 2px solid var(--primary);
             padding: 2px;
             cursor: pointer;
         }
-
         .header-text h1 {
-            color: white;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
+            color: var(--primary);
         }
-
         .header-text p {
-            color: rgba(255,255,255,0.7);
-            font-size: 12px;
+            color: var(--text-secondary);
+            font-size: 13px;
         }
-
-        /* BANNER */
-        .banner {
-            padding: 16px;
-            padding-bottom: 0;
+        /* ADDRESS PAGE STYLES */
+        .address-page-content {
+            padding: 24px 20px;
+            min-height: calc(100vh - 120px);
         }
-
-        .banner-container {
+        .address-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .contact-item {
+            background: white;
             border-radius: 16px;
-            overflow: hidden;
-            position: relative;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
         }
-
-        .banner-image {
-            width: 100%;
-            height: 176px;
-            object-fit: cover;
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
         }
-
-        .banner-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 16px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-        }
-
-        .banner-overlay p {
+        .contact-icon i {
             color: white;
-            font-size: 14px;
-            font-weight: 600;
+            width: 28px;
+            height: 28px;
         }
-
+        .contact-text {
+            flex: 1;
+        }
+        .contact-text strong {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .contact-text span, .contact-text a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            word-break: break-word;
+        }
+        .contact-text a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .footer-copyright {
+            text-align: center;
+            padding: 20px 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 40px;
+        }
+        /* BANNER (kept for home) */
+        .banner { padding: 16px; padding-bottom: 0; }
+        .banner-container { overflow: hidden; border-radius: 16px; position: relative; }
+        .banner-image { width: 100%; height: 176px; object-fit: cover; }
+        .banner-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+        }
+        .banner-overlay p { color: white; font-size: 14px; font-weight: 600; }
         /* ANNOUNCEMENT */
         .announcement {
             margin: 16px;
-            background: var(--primary-light);
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            gap: 12px;
-        }
-
-        .announcement-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--primary-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* MENU */
-        .menu-section {
-            padding: 0 16px 20px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3,1fr);
-            gap: 12px;
-        }
-
-        .menu-card {
             background: white;
-            padding: 16px 8px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            cursor: pointer;
-        }
-
-        .menu-card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--primary-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .menu-card p {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        /* FEATURES */
-        .features-card {
-            margin: 0 16px 80px;
-            background: linear-gradient(135deg, var(--primary), #1a4fd6);
             padding: 16px;
             border-radius: 16px;
-            color: white;
-        }
-
-        .features-header {
             display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .features-list li {
-            list-style: none;
-            padding: 4px 0;
-            font-size: 14px;
-        }
-
-        /* PAGE SYSTEM */
-        .page {
-            display: none;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* UPDATED BOTTOM NAV */
-        .bottom-nav {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 430px;
-            height: 62px;
-            background: var(--card);
-            display: flex;
-            justify-content: space-around;
+            gap: 16px;
             align-items: center;
-            border-top: 1px solid var(--border);
-            padding-bottom: calc(var(--safe-area-bottom) + 6px);
-            padding-top: 6px;
-            z-index: 100;
+            border: 2px solid var(--primary);
+            box-shadow: 0 8px 24px rgba(209,158,51,0.25);
         }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            padding: 4px 16px;
-            font-size: 11px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-weight: 600;
-            position: relative;
-        }
-
-        .nav-item i {
-            width: 26px;
-            height: 26px;
-        }
-
-        .nav-item.active {
-            color: var(--primary);
-        }
-
-        .nav-item.active::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            width: 36px;
-            height: 3px;
+        .announcement-icon {
+            width: 52px; height: 52px;
+            border-radius: 50%;
             background: var(--primary);
-            border-radius: 4px;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .announcement-icon i { color: white; width: 28px; height: 28px; }
+        .announcement-text h3 {
+            font-size: 18px; font-weight: 700; color: var(--primary); margin: 0;
+        }
+        .announcement-text p {
+            font-size: 14px; color: var(--text-primary); margin: 6px 0 0; font-weight: 500;
+        }
+        /* MENU SECTION (kept for home) */
+        .menu-section { padding: 0 16px 20px; }
+        .section-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .menu-card {
+            background: #4C2F23; padding: 14px 8px; border-radius: 12px;
+            text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: 1px solid #3b241a; cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            transition: 0.15s;
+        }
+        .menu-card-icon {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: #7B4A37; display: flex; justify-content: center; align-items: center;
+        }
+        .menu-card-icon i { color: #FDEFD3; }
+        .menu-card p { color: #FDEFD3; font-size: 12px; font-weight: 600; }
+        .menu-card:active { transform: scale(0.96); }
+        /* FEATURES (kept for home) */
+        .features-card {
+            margin: 0 16px 100px; background: var(--primary);
+            padding: 16px; border-radius: 16px; color: white;
+        }
+        .features-header { display: flex; gap: 8px; margin-bottom: 12px; }
+        .features-list li { list-style: none; padding: 4px 0; font-size: 14px; }
+        /* PAGE SYSTEM */
+        .page { display: none; }
+        .page.active { display: block; }
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 430px; height: 62px;
+            background: white; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-around; align-items: center;
+            padding-bottom: calc(var(--safe-area-bottom) + 6px); z-index: 200;
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; gap: 3px;
+            padding: 4px 16px; font-size: 11px; color: var(--text-secondary);
+            cursor: pointer; font-weight: 600; position: relative;
+        }
+        .nav-item.active { color: var(--primary); }
+        .nav-item.active::before {
+            content: ''; position: absolute; top: -2px;
+            width: 36px; height: 3px; background: var(--primary); border-radius: 4px;
         }
     </style>
 </head>
-
 <body>
     <div class="app-container">
-
         <!-- HEADER -->
         <header class="header">
             <img src="images/gplogo.jpg" id="gpLogo" class="logo">
@@ -269,10 +225,8 @@
             </div>
         </header>
 
-        <!-- HOME PAGE -->
+        <!-- HOME PAGE (unchanged except for consistency) -->
         <div id="home-page" class="page active">
-
-            <!-- Banner -->
             <div class="banner">
                 <div class="banner-container">
                     <img src="images/banner.jpg" class="banner-image">
@@ -281,20 +235,18 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Announcement -->
             <div class="announcement">
-                <div class="announcement-icon"><i data-lucide="bell"></i></div>
-                <div>
+                <div class="announcement-icon">
+                    <i data-lucide="megaphone"></i>
+                </div>
+                <div class="announcement-text">
                     <h3>New Batch Starting!</h3>
-                    <p>Army GD / Technical / Clerk batch from Feb 2026</p>
+                    <p>Army GD / Technical / Clerk batch from <span style="color: var(--primary); font-weight: 700;">Feb 2026</span></p>
                 </div>
             </div>
-
-            <!-- Menu -->
+            <!-- Quick Access and Features remain the same -->
             <section class="menu-section">
                 <h2 class="section-title">Quick Access</h2>
-
                 <div class="menu-grid">
                     <button class="menu-card"><div class="menu-card-icon"><i data-lucide="play-circle"></i></div><p>Our Training Videos</p></button>
                     <button class="menu-card"><div class="menu-card-icon"><i data-lucide="clipboard-check"></i></div><p>Army Exam Test</p></button>
@@ -304,8 +256,6 @@
                     <button class="menu-card"><div class="menu-card-icon"><i data-lucide="clock"></i></div><p>Previous Years</p></button>
                 </div>
             </section>
-
-            <!-- Features -->
             <div class="features-card">
                 <div class="features-header">
                     <i data-lucide="sparkles"></i>
@@ -320,16 +270,44 @@
             </div>
         </div>
 
-        <!-- ADDRESS PAGE -->
+        <!-- ADDRESS PAGE - Redesigned to match the app theme -->
         <div id="address-page" class="page">
-            <div style="padding:20px">
-                <h1>Address</h1>
-                <p>GP Soldiers Academy  
-                Vijayapur, Karnataka</p>
+            <div class="address-page-content">
+                <h2 class="address-title">Contact & Location</h2>
+
+                <div class="contact-item">
+                    <div class="contact-icon"><i data-lucide="phone"></i></div>
+                    <div class="contact-text">
+                        <strong>Phone Numbers</strong>
+                        <span>+91 94195 75333</span><br>
+                        <span>+91 94830 69504</span><br>
+                        <span>+91 94496 02273</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon"><i data-lucide="mail"></i></div>
+                    <div class="contact-text">
+                        <strong>Email</strong>
+                        <a href="mailto:gpaccadamy@gmail.com">gpaccadamy@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon"><i data-lucide="map-pin"></i></div>
+                    <div class="contact-text">
+                        <strong>Address</strong>
+                        <span>Solapur By Pass,<br>Near Roopa Devi PU College,<br>Vijayapura, Karnataka</span>
+                    </div>
+                </div>
+
+                <div class="footer-copyright">
+                    © 2026 GP Soldiers Academy – All Rights Reserved
+                </div>
             </div>
         </div>
 
-        <!-- ABOUT PAGE -->
+        <!-- ABOUT PAGE (kept simple) -->
         <div id="about-page" class="page">
             <div style="padding:20px">
                 <h1>About Us</h1>
@@ -337,65 +315,51 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
+        <!-- BOTTOM NAV -->
         <nav class="bottom-nav">
             <a class="nav-item active" id="nav-home" onclick="showPage('home')">
                 <i data-lucide="home"></i>
                 <span>Home</span>
             </a>
-
             <a class="nav-item" id="nav-address" onclick="showPage('address')">
                 <i data-lucide="map-pin"></i>
                 <span>Address</span>
             </a>
-
             <a class="nav-item" id="nav-about" onclick="showPage('about')">
                 <i data-lucide="info"></i>
                 <span>About Us</span>
             </a>
         </nav>
-
     </div>
 
     <script>
         lucide.createIcons();
-
         function showPage(page) {
             document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
             document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-
             document.getElementById(page + "-page").classList.add("active");
             document.getElementById("nav-" + page).classList.add("active");
-
-            window.scrollTo(0, 0);
+            window.scrollTo(0,0);
         }
-
-        // Long press admin unlock
+        // ADMIN SECRET LONG PRESS (unchanged)
         let pressTimer;
         const logo = document.getElementById('gpLogo');
-
-        logo.addEventListener('mousedown', startPress);
-        logo.addEventListener('touchstart', startPress);
-        logo.addEventListener('mouseup', endPress);
-        logo.addEventListener('touchend', endPress);
-        logo.addEventListener('mouseleave', endPress);
-
         function startPress() {
             pressTimer = setTimeout(() => {
                 let pass = prompt("Enter admin password:");
                 if (pass === "gpsoldiers2024") {
                     alert("Admin Access Granted");
-                    // window.location.href = "admin.html";
                 } else {
                     alert("Incorrect Password");
                 }
             }, 1500);
         }
-
-        function endPress() {
-            clearTimeout(pressTimer);
-        }
+        function endPress() { clearTimeout(pressTimer); }
+        logo.addEventListener('mousedown', startPress);
+        logo.addEventListener('touchstart', startPress);
+        logo.addEventListener('mouseup', endPress);
+        logo.addEventListener('touchend', endPress);
+        logo.addEventListener('mouseleave', endPress);
     </script>
 </body>
 </html>
-
