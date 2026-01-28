@@ -13,88 +13,53 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root {
-            --primary: #D19E33;
-            --primary-dark: #b5892c;
-            --primary-light: rgba(209,158,51,0.15);
-            --background: #F7F3E9;
-            --card: #FFFFFF;
-            --text-primary: #3A2F1B;
-            --text-secondary: #7E6E58;
-            --border: #E6DCC8;
-            --safe-area-top: env(safe-area-inset-top);
-            --safe-area-bottom: env(safe-area-inset-bottom);
+            --primary: #D19E33; --primary-dark: #b5892c; --primary-light: rgba(209,158,51,0.15);
+            --background: #F7F3E9; --card: #FFFFFF; --text-dark: #3A2F1B; --text-light: #7E6E58;
+            --border: #E6DCC8; --danger: #c2410c; --success: #15803d;
         }
-        body { font-family: 'Inter', sans-serif; background: var(--background); color: var(--text-primary); min-height: 100vh; }
+        body { font-family: 'Inter', sans-serif; background: var(--background); color: var(--text-dark); min-height: 100vh; }
         .app-container { max-width: 430px; margin: 0 auto; min-height: 100vh; background: var(--background); }
 
-        /* HEADER */
         .header {
             background: white; border-bottom: 1px solid var(--border);
-            padding: 14px 16px; padding-top: calc(var(--safe-area-top) + 14px);
+            padding: 14px 16px; padding-top: calc(env(safe-area-inset-top) + 14px);
             display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100;
         }
         .logo { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); padding: 2px; cursor: pointer; }
         .header-text h1 { font-size: 20px; font-weight: 700; color: var(--primary); }
-        .header-text p { color: var(--text-secondary); font-size: 13px; }
+        .header-text p { color: var(--text-light); font-size: 13px; }
 
-        /* PAGES */
-        .page { display: none; padding-bottom: 100px; }
-        .page.active { display: block; }
+        .page, .admin-page { display: none; padding-bottom: 90px; }
+        .page.active, .admin-page.active { display: block; }
 
-        /* BANNER */
         .banner { padding: 16px; padding-bottom: 0; }
         .banner-container { overflow: hidden; border-radius: 16px; position: relative; background: #111; }
         .banner-image { width: 100%; height: 200px; object-fit: contain; background: #111; display: block; }
-        .banner-overlay {
-            position: absolute; bottom: 0; left: 0; right: 0; padding: 16px;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            color: white; font-size: 14px; font-weight: 600;
-        }
+        .banner-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white; font-size: 14px; font-weight: 600; }
 
-        /* ANNOUNCEMENT */
-        .announcement {
-            margin: 16px; background: white; padding: 16px; border-radius: 16px; display: flex; gap: 16px;
-            align-items: center; border: 2px solid var(--primary); box-shadow: 0 6px 20px rgba(209,158,51,0.22);
-        }
+        .announcement { margin: 16px; background: white; padding: 16px; border-radius: 16px; display: flex; gap: 16px; align-items: center; border: 2px solid var(--primary); box-shadow: 0 6px 20px rgba(209,158,51,0.22); }
         .announcement-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--primary); display: flex; justify-content: center; align-items: center; }
         .announcement-icon i { color: white; width: 28px; height: 28px; }
         .announcement-text h3 { font-size: 18px; font-weight: 700; color: var(--primary); }
-        .announcement-text p { font-size: 14px; color: var(--text-primary); margin-top: 6px; font-weight: 500; }
+        .announcement-text p { font-size: 14px; color: var(--text-dark); margin-top: 6px; font-weight: 500; }
 
-        /* RECTANGULAR BOLD BUTTONS */
         .menu-section { padding: 0 16px 24px; }
         .section-title { font-size: 17px; font-weight: 700; margin: 0 16px 16px; }
         .menu-grid { display: flex; flex-direction: column; gap: 12px; }
         .menu-card {
-            background: var(--primary);
-            color: #1a1200;
-            padding: 16px 18px;
-            border-radius: 14px;
-            display: flex; align-items: center; gap: 16px;
-            box-shadow: 0 6px 18px rgba(209,158,51,0.35);
-            cursor: pointer; transition: all 0.18s ease;
-            font-weight: 700; font-size: 15px;
+            background: var(--primary); color: #1a1200; padding: 16px 18px; border-radius: 14px;
+            display: flex; align-items: center; gap: 16px; box-shadow: 0 6px 18px rgba(209,158,51,0.35);
+            cursor: pointer; transition: all 0.18s ease; font-weight: 700; font-size: 15px;
         }
-        .menu-card:active {
-            transform: translateY(2px);
-            box-shadow: 0 4px 12px rgba(209,158,51,0.4);
-        }
-        .menu-card-icon {
-            width: 44px; height: 44px; border-radius: 10px;
-            background: rgba(0,0,0,0.18); display: flex; justify-content: center; align-items: center;
-        }
+        .menu-card:active { transform: translateY(2px); box-shadow: 0 4px 12px rgba(209,158,51,0.4); }
+        .menu-card-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(0,0,0,0.18); display: flex; justify-content: center; align-items: center; }
         .menu-card-icon i { color: white; width: 24px; height: 24px; }
 
-        /* CONTENT CARD */
-        .content-card {
-            margin: 0 16px 32px; background: white; border-radius: 16px; padding: 24px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 1px solid var(--border);
-        }
+        .content-card { margin: 0 16px 32px; background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 1px solid var(--border); }
 
-        /* VIDEOS */
         .videos-header { padding: 20px 16px 12px; text-align: center; }
         .videos-title { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-        .videos-subtitle { font-size: 14px; color: var(--text-secondary); }
+        .videos-subtitle { font-size: 14px; color: var(--text-light); }
         .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; padding: 0 16px 32px; }
         .video-card { background: #4C2F23; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.18); border: 1px solid #3b241a; }
         .video-wrapper { position: relative; padding-top: 56.25%; background: #111; }
@@ -103,39 +68,68 @@
         .video-info h3 { color: #FDEFD3; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
         .video-info p { color: #D9C7A8; font-size: 13px; line-height: 1.45; }
 
-        /* ADDRESS & ABOUT */
         .address-item { display: flex; gap: 14px; margin-bottom: 24px; align-items: flex-start; }
         .address-icon { width: 44px; height: 44px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .address-icon i { color: var(--primary); }
-        .address-content h3 { font-size: 16px; margin-bottom: 4px; }
-        .address-content p { color: var(--text-secondary); line-height: 1.5; }
+
         .mission-vision { display: grid; gap: 20px; margin: 24px 0; }
         .mission-card, .vision-card { background: var(--primary-light); border-radius: 12px; padding: 20px; text-align: center; border: 1px solid var(--primary); }
-        .mission-card h3, .vision-card h3 { color: var(--primary); font-size: 18px; margin-bottom: 10px; }
         .call-to-action { text-align: center; margin-top: 32px; padding: 20px; background: var(--primary); color: white; border-radius: 16px; font-weight: 600; font-size: 16px; }
         .features-list, .about-features-list { list-style: none; padding: 0; margin: 0; }
-        .features-list li, .about-features-list li { font-size: 15px; margin: 10px 0; padding-left: 28px; position: relative; color: var(--text-secondary); }
+        .features-list li, .about-features-list li { font-size: 15px; margin: 10px 0; padding-left: 28px; position: relative; color: var(--text-light); }
         .features-list li::before, .about-features-list li::before { content: "★"; color: var(--primary); position: absolute; left: 0; font-size: 18px; }
 
-        .footer-note { text-align: center; color: var(--text-secondary); font-size: 13px; margin: 40px 16px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .footer-note { text-align: center; color: var(--text-light); font-size: 13px; margin: 40px 16px; padding-top: 20px; border-top: 1px solid var(--border); }
 
-        /* BOTTOM NAV */
         .bottom-nav {
             position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
             width: 100%; max-width: 430px; height: 68px; background: white;
             border-top: 1px solid var(--border); display: flex; justify-content: space-around;
-            align-items: center; padding-bottom: calc(var(--safe-area-bottom) + 6px); z-index: 200;
+            align-items: center; padding-bottom: calc(env(safe-area-inset-bottom) + 6px); z-index: 200;
         }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: var(--text-secondary); font-weight: 600; cursor: pointer; position: relative; padding: 6px 16px; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: var(--text-light); font-weight: 600; cursor: pointer; position: relative; padding: 6px 16px; }
         .nav-item.active { color: var(--primary); }
         .nav-item.active::before { content: ''; position: absolute; top: -6px; width: 36px; height: 3px; background: var(--primary); border-radius: 4px; }
+
+        /* ADMIN DASHBOARD STYLES */
+        .admin-header {
+            background: white; border-bottom: 1px solid var(--border);
+            padding: 16px; padding-top: calc(env(safe-area-inset-top) + 16px);
+            display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100;
+        }
+        .admin-logo { width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--primary); padding: 3px; }
+        .admin-title { font-size: 20px; font-weight: 700; color: var(--primary); }
+        .admin-welcome { font-size: 13px; color: var(--text-light); }
+
+        .welcome-card {
+            margin: 24px 0 32px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white; border-radius: 16px; padding: 24px 20px; text-align: center;
+            box-shadow: 0 8px 24px rgba(209,158,51,0.35);
+        }
+        .welcome-card h1 { font-size: 24px; margin-bottom: 8px; }
+        .welcome-card p { font-size: 15px; opacity: 0.95; }
+
+        .admin-menu { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+        .admin-btn {
+            background: white; border: 2px solid var(--primary); border-radius: 16px; padding: 20px 24px;
+            display: flex; align-items: center; gap: 18px; font-size: 17px; font-weight: 700;
+            color: var(--text-dark); text-decoration: none; box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            transition: all 0.18s ease; position: relative; overflow: hidden;
+        }
+        .admin-btn:active { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(209,158,51,0.3); border-color: var(--primary-dark); }
+        .btn-icon { width: 56px; height: 56px; background: var(--primary-light); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .btn-icon i { color: var(--primary); width: 32px; height: 32px; }
+        .btn-success .btn-icon { background: rgba(21,128,61,0.12); }
+        .btn-success i { color: var(--success); }
+
+        .admin-footer { text-align: center; padding: 24px 0 40px; color: var(--text-light); font-size: 13px; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
 <div class="app-container">
 
-    <header class="header">
+    <header class="header" id="main-header">
         <img src="images/gplogo.jpg" id="gpLogo" class="logo" alt="GP Logo">
         <div class="header-text">
             <h1>GP SOLDIERS ACADEMY</h1>
@@ -147,7 +141,7 @@
     <div id="home" class="page active">
         <div class="banner">
             <div class="banner-container">
-                <img src="images/banner.jpg" class="banner-image" alt="GP Soldiers Academy Banner">
+                <img src="images/banner.jpg" class="banner-image" alt="Banner">
                 <div class="banner-overlay">
                     <p>Join India's Premier Army Preparation Institute</p>
                 </div>
@@ -206,7 +200,7 @@
         </div>
     </div>
 
-    <!-- VIDEOS PAGE -->
+    <!-- VIDEOS - ALL 5 CARDS FULLY WRITTEN -->
     <div id="videos" class="page">
         <div class="videos-header">
             <h2 class="videos-title">Academy Videos</h2>
@@ -214,15 +208,17 @@
         </div>
 
         <div class="video-grid">
+
             <div class="video-card">
                 <div class="video-wrapper">
                     <video controls preload="metadata" playsinline>
                         <source src="videos/gpvideo1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
                     <h3>SIR Sharanayya Bhandarimath</h3>
-                    <p>Powerful NDA preparation sessions</p>
+                    <p>Watch our powerful NDA preparation sessions</p>
                 </div>
             </div>
 
@@ -230,11 +226,12 @@
                 <div class="video-wrapper">
                     <video controls preload="metadata" playsinline>
                         <source src="videos/gpvideo2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
                     <h3>CDS SSB Interview Tips</h3>
-                    <p>Expert guidance to crack SSB interviews</p>
+                    <p>Expert guidance for cracking SSB interviews</p>
                 </div>
             </div>
 
@@ -242,11 +239,12 @@
                 <div class="video-wrapper">
                     <video controls preload="metadata" playsinline>
                         <source src="videos/gpvideo3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
                     <h3>AFCAT Written Exam Strategy</h3>
-                    <p>Smart techniques to score high</p>
+                    <p>Complete strategy to score high in AFCAT written exam</p>
                 </div>
             </div>
 
@@ -254,11 +252,12 @@
                 <div class="video-wrapper">
                     <video controls preload="metadata" playsinline>
                         <source src="videos/gpvideo4.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
                     <h3>Physical Training Demo</h3>
-                    <p>Daily disciplined PT sessions</p>
+                    <p>See our disciplined daily PT sessions in action</p>
                 </div>
             </div>
 
@@ -266,25 +265,24 @@
                 <div class="video-wrapper">
                     <video controls preload="metadata" playsinline>
                         <source src="videos/gpvideo5.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
                     <h3>Success Stories & Motivation</h3>
-                    <p>Inspiring stories from selected students</p>
+                    <p>Hear inspiring stories from our selected students</p>
                 </div>
             </div>
+
         </div>
 
         <div class="footer-note">© 2026 GP Soldier Academy – All Rights Reserved</div>
     </div>
 
-    <!-- ADDRESS PAGE -->
+    <!-- ADDRESS -->
     <div id="address" class="page">
         <div class="content-card">
-            <h2 style="font-size:24px; font-weight:700; color:var(--primary); text-align:center; margin-bottom:24px;">
-                Contact Us
-            </h2>
-
+            <h2 style="font-size:24px; font-weight:700; color:var(--primary); text-align:center; margin-bottom:24px;">Contact Us</h2>
             <div class="address-item">
                 <div class="address-icon"><i data-lucide="phone"></i></div>
                 <div class="address-content">
@@ -292,7 +290,6 @@
                     <p>+91 94195 75333<br>+91 94830 69504<br>+91 94496 022738</p>
                 </div>
             </div>
-
             <div class="address-item">
                 <div class="address-icon"><i data-lucide="mail"></i></div>
                 <div class="address-content">
@@ -300,7 +297,6 @@
                     <p>gpaccadamy@gmail.com</p>
                 </div>
             </div>
-
             <div class="address-item">
                 <div class="address-icon"><i data-lucide="map-pin"></i></div>
                 <div class="address-content">
@@ -309,44 +305,38 @@
                 </div>
             </div>
         </div>
-
         <div class="footer-note">© 2026 GP Soldier Academy – All Rights Reserved</div>
     </div>
 
-    <!-- ABOUT PAGE -->
+    <!-- ABOUT -->
     <div id="about" class="page">
         <div class="content-card">
-            <h2 style="font-size:26px; font-weight:700; color:var(--primary); text-align:center; margin-bottom:20px;">
-                About Us
-            </h2>
-
-            <p style="font-size:15px; line-height:1.6; color:var(--text-secondary); text-align:center; margin-bottom:24px;">
+            <h2 style="font-size:26px; font-weight:700; color:var(--primary); text-align:center; margin-bottom:20px;">About Us</h2>
+            <p style="font-size:15px; line-height:1.6; color:var(--text-light); text-align:center; margin-bottom:24px;">
                 GP Soldiers Academy is dedicated to transforming young aspirants into proud soldiers of the Indian Army.
             </p>
 
             <div class="mission-vision">
                 <div class="mission-card">
                     <h3>Our Mission</h3>
-                    <p>To deliver disciplined, result-oriented training that builds confident, fit, and mentally strong future soldiers.</p>
+                    <p>To provide disciplined, structured and result-oriented training that builds not just knowledgeable candidates, but confident, physically fit, and mentally strong future soldiers ready to serve the nation.</p>
                 </div>
                 <div class="vision-card">
                     <h3>Our Vision</h3>
-                    <p>To be the most trusted defence academy in North Karnataka with consistent top selections.</p>
+                    <p>To be recognized as the most trusted and successful defence academy in North Karnataka, consistently producing top-ranking selections in the Indian Army year after year.</p>
                 </div>
             </div>
 
-            <h3 style="font-size:19px; font-weight:700; color:var(--primary); text-align:center; margin:28px 0 12px;">
-                What Makes Us Different
-            </h3>
-
+            <h3 style="font-size:19px; font-weight:700; color:var(--primary); text-align:center; margin:28px 0 12px;">What Makes Us Different</h3>
             <ul class="about-features-list">
-                <li>Ex-Army personnel & experienced faculty</li>
+                <li>Ex-Army personnel and experienced faculty as trainers</li>
                 <li>95%+ selection rate in recent batches</li>
-                <li>Complete preparation: Written + Physical + Medical</li>
+                <li>Complete preparation: Written + Physical + Medical + Interview</li>
                 <li>Daily physical training with professional equipment</li>
-                <li>Regular mock tests – latest pattern</li>
-                <li>Comprehensive notes + previous year questions</li>
-                <li>Hostel & mess with disciplined environment</li>
+                <li>Regular mock tests based on latest exam patterns</li>
+                <li>Comprehensive study material + previous year question banks</li>
+                <li>Hostel & mess facility with disciplined environment</li>
+                <li>Personal guidance and motivational sessions</li>
             </ul>
 
             <div class="call-to-action">
@@ -354,24 +344,55 @@
                 <span style="font-size:14px; opacity:0.9;">Your Dream of Wearing the Olive Green Starts Here</span>
             </div>
         </div>
-
         <div class="footer-note">© 2026 GP Soldier Academy – All Rights Reserved</div>
     </div>
 
-    <!-- BOTTOM NAVIGATION -->
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="showPage('home')">
-            <i data-lucide="home"></i>
-            <span>Home</span>
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin" class="admin-page">
+        <header class="admin-header">
+            <img src="images/gplogo.jpg" alt="GP Logo" class="admin-logo">
+            <div>
+                <div class="admin-title">Admin Panel</div>
+                <div class="admin-welcome">GP Soldiers Academy</div>
+            </div>
+            <button onclick="showPage('home')" style="background:none;border:none;font-size:32px;cursor:pointer;color:var(--primary);font-weight:bold;">×</button>
+        </header>
+
+        <div class="welcome-card">
+            <h1>Welcome, Admin</h1>
+            <p>Manage academy content & students • January 2026</p>
         </div>
-        <div class="nav-item" onclick="showPage('address')">
-            <i data-lucide="map-pin"></i>
-            <span>Address</span>
+
+        <div class="admin-menu">
+            <a href="take-test.html" class="admin-btn">
+                <div class="btn-icon"><i data-lucide="clipboard-check"></i></div>
+                <div>Take / Create Test</div>
+            </a>
+            <a href="upload-video.html" class="admin-btn">
+                <div class="btn-icon"><i data-lucide="video"></i></div>
+                <div>Upload New Video</div>
+            </a>
+            <a href="see-results.html" class="admin-btn btn-success">
+                <div class="btn-icon"><i data-lucide="trophy"></i></div>
+                <div>See Results & Rankings</div>
+            </a>
+            <a href="add-students.html" class="admin-btn">
+                <div class="btn-icon"><i data-lucide="user-plus"></i></div>
+                <div>Add New Students</div>
+            </a>
         </div>
-        <div class="nav-item" onclick="showPage('about')">
-            <i data-lucide="info"></i>
-            <span>About Us</span>
+
+        <div class="admin-footer">
+            © 2026 GP Soldiers Academy – Admin Panel<br>
+            For authorized personnel only
         </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav" id="main-nav">
+        <div class="nav-item active" onclick="showPage('home')"><i data-lucide="home"></i><span>Home</span></div>
+        <div class="nav-item" onclick="showPage('address')"><i data-lucide="map-pin"></i><span>Address</span></div>
+        <div class="nav-item" onclick="showPage('about')"><i data-lucide="info"></i><span>About Us</span></div>
     </nav>
 
 </div>
@@ -380,45 +401,45 @@
     lucide.createIcons();
 
     function showPage(pageId) {
-        // Pause videos if leaving videos page
         if (document.getElementById('videos').classList.contains('active') && pageId !== 'videos') {
-            document.querySelectorAll('#videos video').forEach(video => {
-                video.pause();
-            });
+            document.querySelectorAll('#videos video').forEach(v => v.pause());
         }
 
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
+        document.querySelectorAll('.page, .admin-page').forEach(p => p.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
 
-        // Update active state in bottom nav (only for home/address/about)
+        document.getElementById('main-nav').style.display = (pageId === 'admin') ? 'none' : 'flex';
+
         document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.toggle('active', item.getAttribute('onclick') === `showPage('${pageId}')`);
+            item.classList.toggle('active', item.getAttribute('onclick')?.includes(`'${pageId}'`));
         });
 
         window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
-    // ADMIN LONG PRESS ON LOGO
+    // LONG PRESS ON LOGO → ADMIN ACCESS (3 seconds, case-insensitive)
     let pressTimer;
     const logo = document.getElementById('gpLogo');
-    function startPress() {
+
+    function startPress(e) {
+        e.preventDefault();
         pressTimer = setTimeout(() => {
-            let pass = prompt("Enter admin password:");
-            if (pass === "gpsoldiers2024") {
-                alert("Admin Access Granted ✓");
-            } else {
+            let input = prompt("Enter admin password:");
+            if (input && input.trim().toLowerCase() === "gpsoldier55") {
+                showPage('admin');
+            } else if (input) {
                 alert("Incorrect Password ✗");
             }
-        }, 1500);
+        }, 3000); // 3 seconds
     }
+
     function endPress() { clearTimeout(pressTimer); }
 
     logo.addEventListener('mousedown', startPress);
-    logo.addEventListener('touchstart', startPress);
+    logo.addEventListener('touchstart', startPress, { passive: false });
     logo.addEventListener('mouseup', endPress);
     logo.addEventListener('touchend', endPress);
+    logo.addEventListener('touchcancel', endPress);
     logo.addEventListener('mouseleave', endPress);
 </script>
 </body>
