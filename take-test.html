@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Create Exam | GP Soldiers Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #D19E33;
+            --primary-dark: #b5892c;
+            --primary-light: rgba(209,158,51,0.15);
+            --background: #F7F3E9;
+            --card: #FFFFFF;
+            --text-dark: #3A2F1B;
+            --text-light: #7E6E58;
+            --border: #E6DCC8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+        .settings-header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 16px;
+            padding-top: calc(env(safe-area-inset-top) + 16px);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .back-btn {
+            font-size: 1.8rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 8px;
+            margin-right: 16px;
+        }
+        .header-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .container { padding: 16px; max-width: 480px; margin: 0 auto; }
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+        h2 { color: var(--primary); text-align: center; margin-bottom: 20px; font-size: 1.5rem; }
+        input[type="text"], select, input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #fff;
+        }
+        input[type="file"] {
+            padding: 12px;
+            background: var(--primary-light);
+            border: 2px dashed var(--primary);
+            text-align: center;
+            cursor: pointer;
+        }
+        .action-btn {
+            width: 100%;
+            padding: 16px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .add-btn { background: var(--success); }
+        .save-btn { background: var(--warning); }
+        .conduct-btn { background: var(--danger); }
+        .action-btn:active { transform: scale(0.98); }
+        .question-card {
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--primary);
+        }
+        .question-card img { max-width: 100%; border-radius: 8px; margin: 8px 0; }
+        .option-btns {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .option-btns button {
+            padding: 12px;
+            background: var(--primary);
+            border: none;
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .remove-btn {
+            background: var(--danger);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 12px;
+            width: 100%;
+        }
+        .status { text-align: center; margin: 8px 0; font-size: 0.9rem; color: var(--text-light); }
+        @media (max-width: 480px) {
+            .option-btns { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="settings-header">
+    <i class="fas fa-arrow-left back-btn" onclick="window.location.href='admin.html'"></i>
+    <div class="header-title">Create Exam</div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Create New Exam</h2>
+        <input type="text" id="examTitle" placeholder="Exam Title (e.g. Monthly Test - Jan)">
+        <select id="examSubject">
+            <option value="">Select Subject</option>
+            <option value="english">English</option>
+            <option value="kannada">Kannada</option>
+            <option value="gk">GK</option>
+            <option value="maths">Maths</option>
+            <option value="reasoning">Reasoning</option>
+        </select>
+        <select id="examTestNumber">
+            <option value="">Select Test Number</option>
+        </select>
+        <div id="questionsList"></div>
+        <button class="action-btn add-btn" onclick="addQuestion()">+ Add Question</button>
+        <button class="action-btn save-btn" onclick="saveDraft()">Save as Draft</button>
+    </div>
+
+    <div class="card">
+        <h2>Saved Drafts</h2>
+        <div id="draftsList">Loading drafts...</div>
+    </div>
+</div>
+
+<script>
+    const API_URL = "https://your-backend-url.onrender.com"; // ← replace with your actual backend
+
+    let currentQuestions = [];
+
+    function populateTestNumbers() {
+        const select = document.getElementById('examTestNumber');
+        select.innerHTML = '<option value="">Select Test Number</option>';
+        for (let i = 1; i <= 50; i++) {
+            const opt = document.createElement('option');
+            opt.value = i;
+            opt.textContent = `Test ${i}`;
+            select.appendChild(opt);
+        }
+    }
+    populateTestNumbers();
+
+    function addQuestion() {
+        const idx = currentQuestions.length;
+        const container = document.getElementById('questionsList');
+        const div = document.createElement('div');
+        div.className = 'question-card';
+        div.innerHTML = `
+            <h4 style="margin:0 0 12px;color:var(--primary);">Question ${idx + 1}</h4>
+            <p style="margin-bottom:8px;"><strong>Upload image (Question + Options)</strong></p>
+            <input type="file" accept="image/*" id="file${idx}" onchange="uploadImage(${idx})">
+            <div class="status" id="status${idx}">Waiting...</div>
+            <img id="preview${idx}" style="display:none;max-width:100%;border-radius:8px;margin:10px 0;">
+            <label style="margin:12px 0 8px;display:block;font-weight:600;">Correct Answer:</label>
+            <div class="option-btns">
+                <button type="button" onclick="setAnswer(${idx},'A')">A</button>
+                <button type="button" onclick="setAnswer(${idx},'B')">B</button>
+                <button type="button" onclick="setAnswer(${idx},'C')">C</button>
+                <button type="button" onclick="setAnswer(${idx},'D')">D</button>
+            </div>
+            <p>Selected: <strong id="ans${idx}">None</strong></p>
+            <button class="remove-btn" onclick="this.parentElement.remove(); currentQuestions.splice(${idx},1)">Remove</button>
+        `;
+        container.appendChild(div);
+        currentQuestions.push({ imageUrl: "", correctAnswer: "" });
+    }
+
+    async function uploadImage(idx) {
+        const file = document.getElementById(`file${idx}`).files[0];
+        if (!file) return;
+        const status = document.getElementById(`status${idx}`);
+        const preview = document.getElementById(`preview${idx}`);
+        status.textContent = "Uploading...";
+        status.style.color = "orange";
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "your_cloudinary_preset"); // ← YOUR PRESET
+        try {
+            const res = await fetch("https://api.cloudinary.com/v1_1/your-cloud-name/image/upload", {
+                method: "POST",
+                body: formData
+            });
+            const data = await res.json();
+            if (data.secure_url) {
+                currentQuestions[idx].imageUrl = data.secure_url;
+                preview.src = data.secure_url;
+                preview.style.display = "block";
+                status.textContent = "Uploaded ✓";
+                status.style.color = "green";
+            } else {
+                throw new Error(data.error?.message || "Upload failed");
+            }
+        } catch (err) {
+            status.textContent = "Error: " + err.message;
+            status.style.color = "red";
+        }
+    }
+
+    function setAnswer(idx, ans) {
+        currentQuestions[idx].correctAnswer = ans;
+        document.getElementById(`ans${idx}`).textContent = ans;
+    }
+
+    async function saveDraft() {
+        const title = document.getElementById('examTitle').value.trim();
+        const subject = document.getElementById('examSubject').value;
+        const testNumber = document.getElementById('examTestNumber').value;
+
+        if (!title || !subject || !testNumber) return alert("Fill all fields.");
+        if (currentQuestions.length === 0) return alert("Add at least one question.");
+        if (currentQuestions.some(q => !q.imageUrl || !q.correctAnswer)) {
+            return alert("All questions need image & correct answer.");
+        }
+
+        const data = { title, subject, testNumber: Number(testNumber), questions: currentQuestions };
+
+        try {
+            const res = await fetch(`${API_URL}/drafts`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (!res.ok) throw new Error(await res.text());
+            alert("Draft saved!");
+            currentQuestions = [];
+            document.getElementById('questionsList').innerHTML = '';
+            loadDrafts();
+        } catch (err) {
+            alert("Error: " + err.message);
+        }
+    }
+
+    async function loadDrafts() {
+        try {
+            const res = await fetch(`${API_URL}/drafts`);
+            const drafts = await res.json();
+            const container = document.getElementById('draftsList');
+            container.innerHTML = drafts.length ? '' : '<p style="text-align:center;color:var(--text-light);">No drafts yet</p>';
+            drafts.forEach(d => {
+                const div = document.createElement('div');
+                div.className = 'card';
+                div.innerHTML = `
+                    <h3>${d.title}</h3>
+                    <p>Subject: ${d.subject} | Test: ${d.testNumber}</p>
+                    <p>${d.questions.length} questions</p>
+                    <button class="conduct-btn action-btn" onclick="conductExam('${d._id}')">Conduct Exam</button>
+                `;
+                container.appendChild(div);
+            });
+        } catch (err) {
+            document.getElementById('draftsList').innerHTML = '<p style="color:var(--danger);text-align:center;">Error loading drafts</p>';
+        }
+    }
+
+    async function conductExam(id) {
+        if (!confirm("Conduct this exam now?")) return;
+        try {
+            const res = await fetch(`${API_URL}/conduct/${id}`, { method: 'POST' });
+            if (!res.ok) throw new Error(await res.text());
+            alert("Exam conducted!");
+            loadDrafts();
+        } catch (err) {
+            alert("Error: " + err.message);
+        }
+    }
+
+    // Load drafts on page load
+    loadDrafts();
+</script>
+</body>
+</html>
